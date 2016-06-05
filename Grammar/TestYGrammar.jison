@@ -99,7 +99,7 @@ vertex_definition
     : VERTEX variable_name
         {$$ = y.declareVertexVar($2);}
     | VERTEX variable_name '=' assign_expression
-              {$$ = y.declareVertexVar($2, $4)}
+              {$$ = y.declareVertexVar($2, $4, "HAY")}
     ;
 
 edge_definition

@@ -30,11 +30,15 @@ var y = {
     },
     declareEdgeVar: function(varName, assignVar){
         return yUtils.assignVariables(varName, assignVar, "\'edge\'", yConstants.EMPTY_EDGE);
+    },
+    checkForType: function(varName, type){
+        return null;
+    },
+    assign: function(firstVar, secondVar){
+        var result = "if (" + firstVar + ".varType == "+ secondVar + ".varType){" +
+            + firstVar + "=" + secondVar + ";}else{" +errorMessages.ERROR_ADDITIONAL + errorMessages.BAD_ASSIGN +";}";
+        return result;
     }
-};
-
-var errorMessages = {
-    badAssign: '\"You are trying to assign a value to a variable of another type&\"'
 };
 
 var yUtils = {
@@ -47,10 +51,15 @@ var yUtils = {
             result += "if (" + assignVar+".varType == " + type + "){" +
             varName+"=" + assignVar +";" +
             "} else {" + varName + "=" + emptyEntity + ";" +
-            "namespace.logicErrors.error=true; namespace.logicErrors.messages+=" + errorMessages.badAssign + "}";
+            errorMessages.ERROR_ADDITIONAL + errorMessages.BAD_ASSIGN + ";}";
         }
         return result;
     }
+};
+
+var errorMessages = {
+    BAD_ASSIGN: '\"You are trying to assign a value to a variable of another type&\"',
+    ERROR_ADDITIONAL: "namespace.logicErrors.error=true; namespace.logicErrors.messages+="
 };
 
 var yConstants = {

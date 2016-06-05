@@ -74,9 +74,9 @@
 var parser = (function(){
     var parser = {trace: function trace(){},
         yy: {},
-        symbols_: {"error":2,"program":3,"expressions":4,"EOF":5,"function_definition":6,";":7,"FUNCTION":8,"function_name":9,"(":10,"parameters_definition":11,")":12,"{":13,"functionBody":14,"}":15,"ID":16,",":17,"expression":18,"variable_definition":19,"graph_definition":20,"vertex_definition":21,"edge_definition":22,"GRAPH":23,"variable_name":24,"=":25,"assign_expression":26,"VERTEX":27,"EDGE":28,"$accept":0,"$end":1},
-        terminals_: {2:"error",5:"EOF",7:";",8:"FUNCTION",10:"(",12:")",13:"{",15:"}",16:"ID",17:",",23:"GRAPH",25:"=",27:"VERTEX",28:"EDGE"},
-        productions_: [0,[3,2],[4,0],[4,3],[6,8],[9,1],[11,0],[11,1],[11,3],[14,0],[14,3],[18,1],[19,1],[19,1],[19,1],[20,2],[20,4],[21,2],[21,4],[22,2],[22,4],[24,1],[26,1]],
+        symbols_: {"error":2,"program":3,"expressions":4,"EOF":5,"function_definition":6,";":7,"FUNCTION":8,"function_name":9,"(":10,"parameters_definition":11,")":12,"{":13,"functionBody":14,"}":15,"ID":16,",":17,"expression":18,"variable_definition":19,"operations":20,"graph_definition":21,"vertex_definition":22,"edge_definition":23,"GRAPH":24,"variable_name":25,"=":26,"assign_expression":27,"VERTEX":28,"EDGE":29,"$accept":0,"$end":1},
+        terminals_: {2:"error",5:"EOF",7:";",8:"FUNCTION",10:"(",12:")",13:"{",15:"}",16:"ID",17:",",24:"GRAPH",26:"=",28:"VERTEX",29:"EDGE"},
+        productions_: [0,[3,2],[4,0],[4,3],[6,8],[9,1],[11,0],[11,1],[11,3],[14,0],[14,3],[18,1],[18,1],[19,1],[19,1],[19,1],[21,2],[21,4],[22,2],[22,4],[23,2],[23,4],[25,1],[27,1],[27,1],[20,3]],
         performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */
                                           /**/) {
             /* this == yyval */
@@ -105,32 +105,38 @@ var parser = (function(){
                     break;
                 case 11:this.$ = $$[$0];
                     break;
-                case 12:this.$ = $$[$0]
+                case 12:this.$ = $$[$0];
                     break;
                 case 13:this.$ = $$[$0]
                     break;
                 case 14:this.$ = $$[$0]
                     break;
-                case 15:this.$ = y.declareGraphVar($$[$0]);
+                case 15:this.$ = $$[$0]
                     break;
-                case 16:this.$ = y.declareGraphVar($$[$0-2], $$[$0])
+                case 16:this.$ = y.declareGraphVar($$[$0]);
                     break;
-                case 17:this.$ = y.declareVertexVar($$[$0]);
+                case 17:this.$ = y.declareGraphVar($$[$0-2], $$[$0])
                     break;
-                case 18:this.$ = y.declareVertexVar($$[$0-2], $$[$0])
+                case 18:this.$ = y.declareVertexVar($$[$0]);
                     break;
-                case 19:this.$ = y.declareEdgeVar($$[$0]);
+                case 19:this.$ = y.declareVertexVar($$[$0-2], $$[$0])
                     break;
-                case 20:this.$ = y.declareEdgeVar($$[$0-2], $$[$0])
+                case 20:this.$ = y.declareEdgeVar($$[$0]);
                     break;
-                case 21:this.$ = $$[$0]
+                case 21:this.$ = y.declareEdgeVar($$[$0-2], $$[$0])
                     break;
                 case 22:this.$ = $$[$0]
                     break;
+                case 23:this.$ = $$[$0]
+                    break;
+                case 24:this.$ = $$[$0]
+                    break;
+                case 25:this.$ = y.assign($$[$0-2], $$[$0])
+                    break;
             }
         },
-        table: [{3:1,4:2,5:[2,2],6:3,8:[1,4]},{1:[3]},{5:[1,5]},{7:[1,6]},{9:7,16:[1,8]},{1:[2,1]},{4:9,5:[2,2],6:3,8:[1,4]},{10:[1,10]},{10:[2,5]},{5:[2,3]},{11:11,12:[2,6],16:[1,12]},{12:[1,13]},{12:[2,7],17:[1,14]},{13:[1,15]},{11:16,12:[2,6],16:[1,12]},{14:17,15:[2,9],18:18,19:19,20:20,21:21,22:22,23:[1,23],27:[1,24],28:[1,25]},{12:[2,8]},{15:[1,26]},{7:[1,27]},{7:[2,11]},{7:[2,12]},{7:[2,13]},{7:[2,14]},{16:[1,29],24:28},{16:[1,29],24:30},{16:[1,29],24:31},{7:[2,4]},{14:32,15:[2,9],18:18,19:19,20:20,21:21,22:22,23:[1,23],27:[1,24],28:[1,25]},{7:[2,15],25:[1,33]},{7:[2,21],25:[2,21]},{7:[2,17],25:[1,34]},{7:[2,19],25:[1,35]},{15:[2,10]},{16:[1,29],24:37,26:36},{16:[1,29],24:37,26:38},{16:[1,29],24:37,26:39},{7:[2,16]},{7:[2,22]},{7:[2,18]},{7:[2,20]}],
-        defaultActions: {5:[2,1],8:[2,5],9:[2,3],16:[2,8],19:[2,11],20:[2,12],21:[2,13],22:[2,14],26:[2,4],32:[2,10],36:[2,16],37:[2,22],38:[2,18],39:[2,20]},
+        table: [{3:1,4:2,5:[2,2],6:3,8:[1,4]},{1:[3]},{5:[1,5]},{7:[1,6]},{9:7,16:[1,8]},{1:[2,1]},{4:9,5:[2,2],6:3,8:[1,4]},{10:[1,10]},{10:[2,5]},{5:[2,3]},{11:11,12:[2,6],16:[1,12]},{12:[1,13]},{12:[2,7],17:[1,14]},{13:[1,15]},{11:16,12:[2,6],16:[1,12]},{14:17,15:[2,9],16:[1,28],18:18,19:19,20:20,21:21,22:22,23:23,24:[1,25],25:24,28:[1,26],29:[1,27]},{12:[2,8]},{15:[1,29]},{7:[1,30]},{7:[2,11]},{7:[2,12]},{7:[2,13]},{7:[2,14]},{7:[2,15]},{26:[1,31]},{16:[1,28],25:32},{16:[1,28],25:33},{16:[1,28],25:34},{7:[2,22],26:[2,22]},{7:[2,4]},{14:35,15:[2,9],16:[1,28],18:18,19:19,20:20,21:21,22:22,23:23,24:[1,25],25:24,28:[1,26],29:[1,27]},{16:[1,28],25:36},{7:[2,16],26:[1,37]},{7:[2,18],26:[1,38]},{7:[2,20],26:[1,39]},{15:[2,10]},{7:[2,25]},{16:[1,28],20:42,25:41,27:40},{16:[1,28],20:42,25:41,27:43},{16:[1,28],20:42,25:41,27:44},{7:[2,17]},{7:[2,23],26:[1,31]},{7:[2,24]},{7:[2,19]},{7:[2,21]}],
+        defaultActions: {5:[2,1],8:[2,5],9:[2,3],16:[2,8],19:[2,11],20:[2,12],21:[2,13],22:[2,14],23:[2,15],29:[2,4],35:[2,10],36:[2,25],40:[2,17],42:[2,24],43:[2,19],44:[2,21]},
         parseError: function parseError(str,hash){if(hash.recoverable){this.trace(str)}else{throw new Error(str)}},
         parse: function parse(input) {
             var self = this, stack = [0], vstack = [null], lstack = [], table = this.table, yytext = '', yylineno = 0, yyleng = 0, recovering = 0, TERROR = 2, EOF = 1;
@@ -335,60 +341,50 @@ var parser = (function(){
                         break;
                     case 2:return 7;
                         break;
-                    case 3:return 25;
+                    case 3:return 26;
                         break;
-                    case 4:return '+';
+                    case 4:return 10;
                         break;
-                    case 5:return '-';
+                    case 5:return 12;
                         break;
-                    case 6:return '*';
+                    case 6:return 17;
                         break;
-                    case 7:return '/';
+                    case 7:return '->';
                         break;
-                    case 8:return '>';
+                    case 8:return 'IF';
                         break;
-                    case 9:return 10;
+                    case 9:return 'RETURN';
                         break;
-                    case 10:return 12;
+                    case 10:return 'THEN';
                         break;
-                    case 11:return 17;
+                    case 11:return 'ELSE';
                         break;
-                    case 12:return 'IF';
+                    case 12:return 8;
                         break;
-                    case 13:return 'RETURN';
+                    case 13:return 24;
                         break;
-                    case 14:return 'THEN';
+                    case 14:return 28;
                         break;
-                    case 15:return 'ELSE';
+                    case 15:return 29;
                         break;
-                    case 16:return 8;
+                    case 16:return 'print';
                         break;
-                    case 17:return 23;
+                    case 17:return 13;
                         break;
-                    case 18:return 27;
+                    case 18:return 15;
                         break;
-                    case 19:return 28;
+                    case 19:return '[';
                         break;
-                    case 20:return 'PRINT';
+                    case 20:return ']';
                         break;
-                    case 21:return 13;
+                    case 21:return 16;
                         break;
-                    case 22:return 15;
-                        break;
-                    case 23:return 'if';
-                        break;
-                    case 24:return '[';
-                        break;
-                    case 25:return ']';
-                        break;
-                    case 26:return 16;
-                        break;
-                    case 27:return 5;
+                    case 22:return 5;
                         break;
                 }
             },
-            rules: [/^(?:\s+)/,/^(?:\n)/,/^(?:;)/,/^(?:=)/,/^(?:\+)/,/^(?:-)/,/^(?:\*)/,/^(?:\/)/,/^(?:>)/,/^(?:\()/,/^(?:\))/,/^(?:,)/,/^(?:if\b)/,/^(?:return\b)/,/^(?:\?)/,/^(?::)/,/^(?:function\b)/,/^(?:graph\b)/,/^(?:vertex\b)/,/^(?:edge\b)/,/^(?:print\b)/,/^(?:\{)/,/^(?:\})/,/^(?:if\b)/,/^(?:\[)/,/^(?:\])/,/^(?:[A-Za-z0-9]+\b)/,/^(?:$)/],
-            conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27],"inclusive":true}}
+            rules: [/^(?:\s+)/,/^(?:\n)/,/^(?:;)/,/^(?:=)/,/^(?:\()/,/^(?:\))/,/^(?:,)/,/^(?:->)/,/^(?:if\b)/,/^(?:return\b)/,/^(?:\?)/,/^(?::)/,/^(?:function\b)/,/^(?:graph\b)/,/^(?:vertex\b)/,/^(?:edge\b)/,/^(?:print\b)/,/^(?:\{)/,/^(?:\})/,/^(?:\[)/,/^(?:\])/,/^(?:[A-Za-z0-9]+\b)/,/^(?:$)/],
+            conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],"inclusive":true}}
         };
         return lexer;
     })();

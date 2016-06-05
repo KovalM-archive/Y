@@ -5,14 +5,10 @@
 \n                    return ';'
 ";"                   return ';';
 "="                   return '=';
-"+"                   return '+';
-"-"                   return '-';
-"*"                   return '*';
-"/"                   return '/';
-">"                   return '>';
 "("                   return '(';
 ")"                   return ')';
 ","                   return ',';
+"->"                  return '->';
 "if"                  return 'IF';
 "return"              return 'RETURN';
 "?"                   return 'THEN';
@@ -21,10 +17,9 @@
 "graph"               return 'GRAPH';
 "vertex"              return 'VERTEX';
 "edge"                return 'EDGE';
-"print"               return 'PRINT';
+"print"               return 'print';
 "{"                   return '{';
 "}"                   return '}';
-"if"                  return 'if';
 "["                   return '[';
 "]"                   return ']';
 [A-Za-z0-9]+\b        return 'ID';
@@ -77,7 +72,7 @@ functionBody
 expression
     : variable_definition
         {$$ = $1;}
-    | function_call
+    | operations
         {$$ = $1;}
     ;
 
@@ -108,7 +103,7 @@ edge_definition
     : EDGE variable_name
         {$$ = y.declareEdgeVar($2);}
     | EDGE variable_name '=' assign_expression
-              {$$ = y.declareEdgeVar($2, $4)}
+        {$$ = y.declareEdgeVar($2, $4)}
     ;
 
 variable_name
@@ -119,10 +114,36 @@ variable_name
 assign_expression
     : variable_name
         {$$ = $1}
+    | operations
+        {$$ = $1}
+    ;
+
+operations
+    : variable_name '=' variable_name
+        {$$ = y.assign($1, $3)}
     ;
 
 
 
+
+
+
+
+
+graph
+    : variable_name
+        {&& = y.checkForType($1, 'graph')}
+    ;
+
+vertex
+    : variable_name
+        {&& = y.checkForType($1, 'vertex')}
+    ;
+
+edge
+    : variable_name
+        {&& = y.checkForType($1, 'edge')}
+    ;
 
 return_expression
     : variable_name
