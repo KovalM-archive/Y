@@ -121,6 +121,8 @@ assign_expression
 operations
     : variable_name '=' variable_name
         {$$ = y.assign($1, $3)}
+    | variable_name '->' variable_name
+        {$$ = y.createEdge($1, $3)}
     ;
 
 

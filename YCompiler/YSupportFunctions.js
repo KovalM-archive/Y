@@ -31,12 +31,15 @@ var y = {
     declareEdgeVar: function(varName, assignVar){
         return yUtils.assignVariables(varName, assignVar, "\'edge\'", yConstants.EMPTY_EDGE);
     },
-    checkForType: function(varName, type){
-        return null;
-    },
     assign: function(firstVar, secondVar){
         var result = "if (" + firstVar + ".varType == "+ secondVar + ".varType){" +
             + firstVar + "=" + secondVar + ";}else{" +errorMessages.ERROR_ADDITIONAL + errorMessages.BAD_ASSIGN +";}";
+        return result;
+    },
+    createEdge: function(start, finish){
+        var result = yUtils.checkForType(start, "vertex") +
+            yUtils.checkForType(finish, "vertex") +
+            yUtils.createEdge(start, finish);
         return result;
     }
 };
@@ -54,12 +57,21 @@ var yUtils = {
             errorMessages.ERROR_ADDITIONAL + errorMessages.BAD_ASSIGN + ";}";
         }
         return result;
-    }
+    },
+    checkForType: function(varName, type) {
+        var result = "if (!(" + varName + ".varType == " + type + ")){" +
+            errorMessages.ERROR_ADDITIONAL + "\"" + type +"\": " + errorMessages.INVALID_TYPE + ";}";
+
+        return result;
+    },
+    createEdge: function(start, finish){}
+
 };
 
 var errorMessages = {
     BAD_ASSIGN: '\"You are trying to assign a value to a variable of another type&\"',
-    ERROR_ADDITIONAL: "namespace.logicErrors.error=true; namespace.logicErrors.messages+="
+    ERROR_ADDITIONAL: 'namespace.logicErrors.error=true; namespace.logicErrors.messages+=',
+    INVALID_TYPE: '\"not valid operation for this type\"'
 };
 
 var yConstants = {
