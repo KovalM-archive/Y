@@ -50,7 +50,7 @@ expressions
 
 function_definition
     : FUNCTION function_name '(' parameters_definition ')' '{' functionBody '}'
-        {$$ = y.function_definition({name: $2, defParameters: $4, functionBody: $7})}
+        {$$ = y.functionDefinition({name: $2, defParameters: $4, functionBody: $7})}
     ;
 
 function_name
@@ -93,14 +93,36 @@ variable_definition
 graph_definition
     : GRAPH variable_name
         {$$ = y.declareGraphVar($2);}
-    | GRAPH variable_name '=' return_expression
-              {$$ = y.declareGraphVar($2) + $3 + $4;}
+    | GRAPH variable_name '=' assign_expression
+              {$$ = y.declareGraphVar($2, $4)}
+    ;
+
+vertex_definition
+    : VERTEX variable_name
+        {$$ = y.declareVertexVar($2);}
+    | VERTEX variable_name '=' assign_expression
+              {$$ = y.declareVertexVar($2, $4)}
+    ;
+
+edge_definition
+    : EDGE variable_name
+        {$$ = y.declareEdgeVar($2);}
+    | EDGE variable_name '=' assign_expression
+              {$$ = y.declareEdgeVar($2, $4)}
     ;
 
 variable_name
     : ID
         {$$ = $1}
     ;
+
+assign_expression
+    : variable_name
+        {$$ = $1}
+    ;
+
+
+
 
 return_expression
     : variable_name
@@ -110,11 +132,6 @@ return_expression
     | graph
         {$$ = $1}
     ;
-
-
-
-
-
 
 variable_definition
     : graph variable_name '=' return_expression
