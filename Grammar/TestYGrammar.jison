@@ -87,6 +87,7 @@ variable_definition
 graph_definition
     : GRAPH variable_name
         {$$ = y.declareGraphVar($2);}
+    | GRAPH variable_name '='
     ;
 
 variable_name

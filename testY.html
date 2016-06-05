@@ -4,15 +4,13 @@
     <title></title>
 </head>
 <body>
-<textarea id="editor" rows="20" cols="50"></textarea><br>
-<button onclick="run()">Compile</button>
-<script src="jquery/jquery.min.js"></script>
+<center>
+    <textarea id="editor" rows="20" cols="50"></textarea><br>
+    <button onclick="run(editor.value)">Run</button>
+</center>
+
 <script src="YCompiler/YCompiler.js"></script>
 <script src="YCompiler/YSupportFunctions.js"></script>
-<script type="text/javascript">
-    function run() {
-        console.log(new Function(parser.parse(editor.value))());
-    }
-</script>
+<script src="YCompiler/YStarter.js"></script>
 </body>
 </html>

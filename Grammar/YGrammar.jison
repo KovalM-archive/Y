@@ -93,6 +93,8 @@ variable_definition
 graph_definition
     : GRAPH variable_name
         {$$ = y.declareGraphVar($2);}
+    | GRAPH variable_name '=' return_expression
+              {$$ = y.declareGraphVar($2) + $3 + $4;}
     ;
 
 variable_name
@@ -100,22 +102,19 @@ variable_name
         {$$ = $1}
     ;
 
-
-
-
-
-
-
 return_expression
     : variable_name
         {$$ = $1}
-    | function
+    | function_call
         {$$ = $1}
     | graph
         {$$ = $1}
-    | function_definition
-        {$$ = $1}
     ;
+
+
+
+
+
 
 variable_definition
     : graph variable_name '=' return_expression
