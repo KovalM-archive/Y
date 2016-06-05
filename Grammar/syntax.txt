@@ -1,0 +1,102 @@
+1) Data types
+Main types: 
+	graph, vertex, edge, double, set.
+
+double:
+	Operators:
+		+, -, *, /, ^, >, <, ==, !=
+
+graph:
+	graph g;
+	Creation:
+		g=createGraph();
+		g=readGraph();
+		g=readGraph(directory);
+
+	Fields:
+		g.vertices - set graph's vertices
+		g.numberVertices - number of graph's vertices
+		g.edges = all graph's edges
+		g.numberEdge - number of graph's edges
+		
+	Input graph:
+		n m 
+		startVertex finishVertex weightEdge (m times) 
+
+		n - the number of vertices, positive integers
+		m - the number of edges, positive integers
+		startVertex - the start of edge, positive integers
+		finishVertex - the finish of edge, positive integers
+		weightEdge - the weight of edge
+
+vertex:
+	vertex v;
+	Creation:
+		v = createVertex(g);
+
+	Fields:
+		v.inVertexNeighbors - neighboring incoming vertices
+		v.outVertexNeighbors - neighboring outcoming vertices
+		v.inEdgeNeighbors - neighboring incoming edges
+		v.outEdgeNeighbors - neighboring outcoming edges
+		v.name - name of vertex, double
+		v.helpSet - set of min path, max path, etc
+
+edge:
+	edge e;
+	Creation:
+		e = createEdge(g, v1, v2);
+		e = v1 -> v2;
+		e = v1 <- v2;
+
+	Fields:
+		e.startVertex - start vertex
+		e.finishVertex - finish vertex
+		e.weight - weight, default 1
+	methods:
+		g.getVertexById(d) - get vertex from graph @g with id d
+		g.addVertex(v) - add vertex @v to graph @g
+		g.addEdge(e) - add edge @e to grapg @g
+		g.removeVertex(v) - remove vertex @v to graph @g
+		g.removeEdge(e) - remove edge @e to grapg @g
+set
+	set s;
+	Creation:
+		s = new set<vertex>;
+		s = new set<edge>;
+		s = new set<double>;
+		s = new set<graph>;
+		s = s.inVertexNeighbors; // set<vertex>
+		s = s.inEdgeNeighbors; // set<edge>
+	methods:
+		s.contains(el) - true if set @s condains element @el
+		s.add(el) - add element @el to set @s
+2) Functions
+		readGraph(string directory) - read graph from directory, return graph
+		readGraph() - read graph, return graph
+		writeGraph(string directory) - write graph from directory, return graph
+		writeGraph() - write graph, return graph
+		createVertex(g) - create and add to graph g new vertex, 
+					   @return vertex with name number of vertices of graph g
+		createEdge(g, v1, v2) - create and add to graph @g new edge, @v2 and @v2 - vertices, 
+							 @return edge
+		createGraph() - create graph, return graph
+		setWeight(e, d) - set weight, @e - edge, @d - double 
+
+3) Conditional operators
+	if-then-else
+	if (equals(v1, v2)){
+
+	} else {
+
+	}
+
+3) Cycles:
+	for (v : g.vertices){
+		//
+	}
+
+	double i=32;
+	while (i>0){
+		//
+	}
